@@ -1,0 +1,28 @@
+name: Daily Commit - 23f1000655@ds.study.iitm.ac.in
+
+on:
+  schedule:
+    - cron: '0 10 * * *'  # Runs daily at 10:00 AM UTC
+  workflow_dispatch:      # Allows manual trigger
+
+jobs:
+  daily-commit:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Configure Git for 23f1000655@ds.study.iitm.ac.in
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "23f1000655@ds.study.iitm.ac.in"
+      
+      - name: Create commit with timestamp
+        run: |
+          echo "# Daily Commit - $(date)" >> daily_log.txt
+          git add daily_log.txt
+          git commit -m "Daily commit by GitHub Actions for 23f1000655@ds.study.iitm.ac.in - $(date)"
+      
+      - name: Push commit to repository
+        run: git push origin main
